@@ -14,9 +14,20 @@ public class Member {
     private String username;
 
     @Column
-    private String name;
-
-    @Column
     private String password;
 
+    public static Member createMember(String username, String password){
+        Member member = new Member();
+        member.setUsername(username);
+        member.setPassword(password);
+        return member;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
