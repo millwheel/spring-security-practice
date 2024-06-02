@@ -18,10 +18,8 @@ public class MemberController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public void addMember(@Valid MemberCreateDto memberCreateDto){
+    public void addMember(@RequestBody @Valid MemberCreateDto memberCreateDto){
         memberService.addMember(memberCreateDto.getUsername(), memberCreateDto.getPassword());
     }
-
-
 
 }

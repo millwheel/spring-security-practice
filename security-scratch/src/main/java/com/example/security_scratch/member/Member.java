@@ -19,15 +19,20 @@ public class Member {
     public static Member createMember(String username, String password){
         Member member = new Member();
         member.setUsername(username);
-        member.setPassword(password);
+
         return member;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
+
+    private void hashPassword(String password){
+
+    }
+
 }
