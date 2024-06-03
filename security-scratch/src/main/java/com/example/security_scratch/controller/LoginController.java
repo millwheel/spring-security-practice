@@ -7,12 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/login")
+@RestController
+@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -22,12 +20,12 @@ public class LoginController {
     @ResponseStatus(HttpStatus.OK)
     public void login(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response){
         Long memberId = loginService.login(loginDto.getUsername(), loginDto.getPassword());
-        // 쿠키에 시간 정보를 주지 않으면 세션 쿠키. 웹브라우저 종료시 삭제됨
+        // Create a session cookie
         Cookie cookie = new Cookie("memberId", String.valueOf(memberId));
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        // 쿠키 시간 정보 설정 1일
-//        cookie.setMaxAge(60 * 60 * 24);
+        // Set cookie max age to 1 day
+        // cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
     }
 
