@@ -31,6 +31,7 @@ public class SecurityConfig{
                             log.info("로그인 실패");
                             response.sendRedirect("/login");
                         })
+                        .permitAll()
                 );
         return http.build();
     }
