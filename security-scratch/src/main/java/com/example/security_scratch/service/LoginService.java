@@ -11,7 +11,11 @@ public class LoginService {
 
     private final MemberRepository memberRepository;
 
-    public void login(String username, String password){
-        Member member = memberRepository.findByUsername(username).orElseThrow();
+    public Long login(String username, String password){
+        Member member = memberRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("There is no member with the username"));
+        if (!member.matchPassword(password)){
+            throw new RuntimeException("The password is not correct");
+        }
+        return member.getId();
     }
 }

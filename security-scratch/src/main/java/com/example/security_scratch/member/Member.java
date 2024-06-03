@@ -1,14 +1,15 @@
 package com.example.security_scratch.member;
 
 import com.example.security_scratch.util.PasswordHashing;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 public class Member {
 
+    @Getter
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -22,6 +23,10 @@ public class Member {
         member.setUsername(username);
         member.setPassword(PasswordHashing.hashPassword(password));
         return member;
+    }
+
+    public boolean matchPassword(String password){
+        return this.hashedPassword.equals(PasswordHashing.hashPassword(password));
     }
 
     private void setUsername(String username) {
