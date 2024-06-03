@@ -17,7 +17,14 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login/process")
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/login/failed")
+                        .usernameParameter("userId")
+                        .passwordParameter("password")
+                );
         return http.build();
     }
 
@@ -25,7 +32,7 @@ public class SecurityConfig{
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         UserDetails user = User.withUsername("user")
                 .password("{noop}1111")
-                .authorities("ROLE_USER")
+                .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
