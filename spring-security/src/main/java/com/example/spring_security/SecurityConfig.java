@@ -29,6 +29,11 @@ public class SecurityConfig{
                                 .rememberMeParameter("remember")
                                 .rememberMeCookieName("remember")
                                 .key("security")
+                )
+                .logout(logout -> logout
+                        .deleteCookies("JSESSIONID", "remember")
+                        .logoutSuccessUrl("/logout/success")
+                        .permitAll()
                 );
 
         return http.build();
