@@ -23,14 +23,6 @@ public class SecurityConfig{
         http
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
-                .rememberMe(rememberMe -> rememberMe
-                        .alwaysRemember(true)
-                        .tokenValiditySeconds(3600)
-                                .userDetailsService(userDetailsService())
-                                .rememberMeParameter("remember")
-                                .rememberMeCookieName("remember")
-                                .key("security")
-                )
                 .logout(logout -> logout
                         .deleteCookies("JSESSIONID", "remember")
                         .logoutSuccessUrl("/logout/success")
