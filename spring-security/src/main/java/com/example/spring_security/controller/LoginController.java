@@ -35,4 +35,14 @@ public class LoginController {
         return String.format("including authority: %s", authoritiesStrings.get(0));
     }
 
+    @GetMapping("/session/expired")
+    public String expired(){
+        return "expired session.";
+    }
+
+    @GetMapping("/session/invalid")
+    public String invalidSession(){
+        return "invalid session.";
+    }
+
 }

@@ -22,11 +22,18 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/session/invalid", "/session/expired").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .userDetailsService(userDetailsService())
+                .sessionManagement(session -> session
+//                        .invalidSessionUrl("/session/invalid")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
+                        .expiredUrl("/session/expired")
+                )
                 .logout(logout -> logout
-                        .deleteCookies("JSESSIONID", "remember")
                         .logoutSuccessUrl("/logout/success")
                         .permitAll()
                 );
