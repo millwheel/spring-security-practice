@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 
 // 빈으로 등록되면 자동적으로 Dao Authentication Provider를 대체한다.
-@Component
+//@Component
 @RequiredArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
