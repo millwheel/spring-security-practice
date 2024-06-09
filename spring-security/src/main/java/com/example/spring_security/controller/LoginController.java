@@ -1,5 +1,7 @@
 package com.example.spring_security.controller;
 
+import com.example.spring_security.SessionInfoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class LoginController {
+
+    private final SessionInfoService sessionInfoService;
 
     @GetMapping("/")
     public String healthCheck(){
@@ -43,6 +48,12 @@ public class LoginController {
     @GetMapping("/session/invalid")
     public String invalidSession(){
         return "invalid session.";
+    }
+
+    @GetMapping("/session/info")
+    public String sessionInfo(){
+        sessionInfoService.sessionInfo();
+        return "session info";
     }
 
 }
