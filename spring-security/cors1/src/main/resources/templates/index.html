@@ -19,8 +19,10 @@
 
                 const data = await response.json();
                 console.log(data);
+                alert("Fetch succeeded!");
             } catch (error) {
                 console.error("Fetch error: ", error);
+                alert("Fetch failed!");
             }
         };
     </script>
