@@ -22,9 +22,9 @@ public class LoginController {
         return "Server is healthy";
     }
 
-    @GetMapping("/home")
-    public String home(){
-        return "home";
+    @GetMapping("/member/only")
+    public String memberOnly(){
+        return "member only. secured api";
     }
 
     @GetMapping("/logout/success")
