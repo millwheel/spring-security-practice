@@ -9,7 +9,6 @@ import org.springframework.session.config.annotation.web.http.EnableSpringHttpSe
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
@@ -22,7 +21,7 @@ public class HttpSessionConfig {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setUseHttpOnlyCookie(true);
         serializer.setUseSecureCookie(true);
-        serializer.setSameSite("None");
+        serializer.setSameSite("Strict");
         return serializer;
     }
 
