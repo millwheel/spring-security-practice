@@ -1,4 +1,4 @@
-package io.security.springsecuritymaster.dto;
+package io.security.springsecuritymaster.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;

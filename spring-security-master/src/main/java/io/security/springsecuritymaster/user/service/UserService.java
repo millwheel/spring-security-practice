@@ -1,6 +1,6 @@
 package io.security.springsecuritymaster.user.service;
 
-import io.security.springsecuritymaster.entity.Account;
+import io.security.springsecuritymaster.domain.entity.Account;
 import io.security.springsecuritymaster.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

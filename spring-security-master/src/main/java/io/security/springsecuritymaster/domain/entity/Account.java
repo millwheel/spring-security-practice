@@ -1,4 +1,4 @@
-package io.security.springsecuritymaster.entity;
+package io.security.springsecuritymaster.domain.entity;
 
 
 import jakarta.persistence.Entity;
