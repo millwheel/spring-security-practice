@@ -1,7 +1,18 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springboot
+    username: admin
+    password: asdf
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
   thymeleaf:
     cache: false
-
 
 logging:
   level:
