@@ -1,8 +1,10 @@
 package io.security.springsecuritymaster.user.controller;
 
+import io.security.springsecuritymaster.domain.dto.AccountDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -34,5 +36,15 @@ public class LoginController {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
         return "redirect:/login";
+    }
+
+    @GetMapping("/denied")
+    public String denied(@RequestParam(required = false) String exception,
+                         @AuthenticationPrincipal AccountDto accountDto,
+                         Model model){
+        // principal은 accountDto를 사용하고 있음
+        model.addAttribute("username", accountDto.getUsername());
+        model.addAttribute("exception", exception);
+        return "login/denied";
     }
 }

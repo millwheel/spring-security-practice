@@ -29,6 +29,7 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 최종 인증 객체 리턴
+        // principal을 accountDto로 주입해주고 있음
         return new UsernamePasswordAuthenticationToken(accountContext.getAccountDto(), null, accountContext.getAuthorities());
     }
 

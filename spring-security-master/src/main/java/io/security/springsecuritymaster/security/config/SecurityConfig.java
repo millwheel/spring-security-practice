@@ -1,5 +1,6 @@
 package io.security.springsecuritymaster.security.config;
 
+import io.security.springsecuritymaster.security.handler.FormAccessDeniedHandler;
 import io.security.springsecuritymaster.security.handler.FormAuthenticationFailureHandler;
 import io.security.springsecuritymaster.security.handler.FormAuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/images", "/js/**", "/favicon.*", "/*/icon-*").permitAll()
                         .requestMatchers("/", "signup", "login*").permitAll()
+                        .requestMatchers("/user").hasAuthority("ROLE_USER")
+                        .requestMatchers("/manager").hasAuthority("ROLE_MANAGER")
+                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.loginPage("/login")
@@ -41,7 +45,9 @@ public class SecurityConfig {
                 // user details service 보다 authentication provider가 더 넓은 범위의 작업을 수행함.
                 // authentication provider 인증을 수행하는 실질적인 로직을 모두 가지고 있음
 //                .userDetailsService(userDetailsService);
-                .authenticationProvider(authenticationProvider);
+                .authenticationProvider(authenticationProvider)
+                .exceptionHandling(exception -> exception.accessDeniedHandler(new FormAccessDeniedHandler("/denied")))
+        ;
         return http.build();
     }
 
